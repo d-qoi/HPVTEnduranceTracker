@@ -41,3 +41,5 @@
 * list ##
 	* this will display all times recorded for #
 
+* speed ##
+	* this will give the average speed in km/hr
