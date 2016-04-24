@@ -31,7 +31,7 @@
 	After that, type the number of the team (as specified in the teams.csv) and hit enter
 		More than one team can be specified at a time using spaces
 
-	End the race with _end_ this will stop the timing
+	End the race with _end_ this will stop the timing and exit the program
 
 ### Other commands
 
