@@ -13,12 +13,20 @@ import time as Time
 teamsFile = ""
 distance = 0
 backup = ""
+startTime = 0
 
 teamList = {}
 timeList = {}
 
 def timeConvert(time):
-	return str(time)
+	return str(int(time))
+
+def prettyTime(time):
+	hours = int(time/3600)
+	time -= hours*3600
+	minute = int(time/60)
+	time -= minute*60
+	return "%d:%d:%d"%(hours,minute,time)
 
 def readConfig():
 	global distance,teamsFile, backup
@@ -39,7 +47,9 @@ def readTeams():
 			timeList[data[1].strip()] = []
 
 def startRace(time):
-	global backup
+	global backup,startTime
+	startTime = time
+	time -= startTime
 	with open(backup, 'a') as back:
 		for teams in timeList.keys():
 			timeList[teams].append(time)
@@ -53,14 +63,14 @@ def calcRank():
 		dist = len(times) * distance
 		if len(times) < 2:
 			continue
-		speed = dist/(times[-1] - times[0])
+		speed = dist/(times[-1])
 		toSort[team] = speed
-	toSort = sorted(toSort, key=lambda split:split[1])
+	toSort = sorted(toSort, key=lambda time:toSort[time])
 	toSort.reverse()
 	return toSort
 
 def main():
-	global teamList, timeList, backup
+	global teamList, timeList, backup,startTime, distance
 	run = True
 	start = False
 	while run:
@@ -71,11 +81,12 @@ def main():
 			continue
 
 		elif "list" in userIn:
-			#print(teamList.keys())
-			num = userIn.strip("list").strip()
+			#print(timeList.keys())
+			num = userIn.strip("list ")
+			print(num)
 			try:
-				for t in timeList[num]:
-					print(t)
+				for t in timeList[num.strip()]:
+					print(prettyTime(t))
 				print(len(timeList[num]), 'laps')
 			except:
 				print("not a team")
@@ -86,6 +97,13 @@ def main():
 
 			continue
 
+		elif 'speed' in userIn:
+			num = userIn.strip("speed ").strip()
+			try:
+				print(len(timeList[num])*distance*3600/timeList[num][-1])
+			except:
+				print("something happened")
+
 		elif "end" in userIn:
 			run = False
 			continue
@@ -95,7 +113,7 @@ def main():
 				print("Race not Started")
 				continue
 			with open(backup,'a') as back:
-				tm = Time.time()
+				tm = Time.time() - startTime
 				nums = userIn.split(' ')
 				for num in nums:
 					if num in timeList:
