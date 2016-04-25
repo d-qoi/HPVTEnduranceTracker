@@ -52,3 +52,11 @@
 
 * speed ##
 	* this will give the average speed in km/hr
+
+### known bugs
+
+* Stop does not take into account the actual ruling, it just adds another time to everyone
+* stop can be called more than once in a row, even before start, and it will still add a time
+* calling stop before start causes a divide by zero condition if rank or speed is called before any other laps are counted
+* if laps are ticked too quickly, it will not count them, this is because it works on whole seconds
+* the inputs are not sanitized, this is wildly exploitable, don't use this in production

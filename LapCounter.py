@@ -60,8 +60,8 @@ def stopRace(time):
 	time -= startTime
 	with open(backup, 'a') as back:
 		for team in timeList.keys():
-			teamList[team].append(time)
-			back.write(teams + " = " + timeConvert(time) + "\n")
+			timeList[team].append(time)
+			back.write(team + " = " + timeConvert(time) + "\n")
 
 def calcRank():
 	global teamList, distance, timeList
@@ -116,7 +116,9 @@ def main():
 				continue
 
 		elif "stop" in userIn:
-
+			start = False
+			stopRace(Time.time())
+			continue
 
 		elif "end" in userIn:
 			run = False
