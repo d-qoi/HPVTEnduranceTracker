@@ -3,6 +3,8 @@
 	This is a lap counter and statistics tool for the HPRA and ASME human powered vehicle competition, specifically the endurance event.
 	Everything in this is licensed under MIT, please read the included license file for details
 
+	This was written for python 3.x.x 
+
 ## Use
 
 
