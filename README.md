@@ -1,5 +1,8 @@
 # Rose-Hulman Institute of Technology Lap Counter Solution
 
+	This is a lap counter and statistics tool for the HPRA and ASME human powered vehicle competition, specifically the endurance event.
+	Everything in this is licensed under MIT, please read the included license file for details
+
 ## Use
 
 
@@ -26,12 +29,16 @@
 
 ### During the race
 	
-	Start the race by typing _start_, hit enter when the flag is dropped
+	Start the race by typing *start*, hit enter when the flag is dropped
 
 	After that, type the number of the team (as specified in the teams.csv) and hit enter
 		More than one team can be specified at a time using spaces
 
-	End the race with _end_ this will stop the timing and exit the program
+	Stop the race with *stop* this will stop the timing, and give everyone a last lap time
+
+	End will exit the program
+
+
 
 ### Other commands
 
