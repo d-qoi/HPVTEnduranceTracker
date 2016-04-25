@@ -47,12 +47,20 @@ def readTeams():
 			timeList[data[1].strip()] = []
 
 def startRace(time):
-	global backup,startTime
+	global backup,startTime,timeList
 	startTime = time
 	time -= startTime
 	with open(backup, 'a') as back:
 		for teams in timeList.keys():
 			timeList[teams].append(time)
+			back.write(teams + " = " + timeConvert(time) + "\n")
+
+def stopRace(time):
+	global backup, startTime, timeList
+	time -= startTime
+	with open(backup, 'a') as back:
+		for team in timeList.keys():
+			teamList[team].append(time)
 			back.write(teams + " = " + timeConvert(time) + "\n")
 
 def calcRank():
@@ -103,6 +111,12 @@ def main():
 				print(len(timeList[num])*distance*3600/timeList[num][-1])
 			except:
 				print("something happened")
+				start = False
+				stopRace(Time.time())
+				continue
+
+		elif "stop" in userIn:
+
 
 		elif "end" in userIn:
 			run = False
