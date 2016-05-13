@@ -82,7 +82,8 @@ def main():
 	run = True
 	start = False
 	while run:
-		userIn = input(":").lower()
+		userIn = input(": ").lower()
+		#print(userIn)
 		if "start" in userIn and not start:
 			start = True
 			startRace(Time.time())
@@ -97,7 +98,9 @@ def main():
 					print(prettyTime(t))
 				print(len(timeList[num]), 'laps')
 			except:
-				print("not a team")
+				print("not a team, listing teams by name")
+				for key in teamList.keys():
+					print(key + " : " + teamList[key])
 
 		elif "rank" in userIn:
 			for rank in calcRank():
