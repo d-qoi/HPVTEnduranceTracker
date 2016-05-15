@@ -14,6 +14,7 @@ teamsFile = ""
 distance = 0
 backup = ""
 startTime = 0
+homeNumber = 0;
 
 teamList = {}
 timeList = {}
@@ -29,13 +30,14 @@ def prettyTime(time):
 	return "%d:%d:%d"%(hours,minute,time)
 
 def readConfig():
-	global distance,teamsFile, backup
+	global distance,teamsFile, backup, homeNumber
 	config = configparser.ConfigParser()
 	config.read('config.conf')
 	distance = float(config["DEFAULT"]["DISTANCE"])
 	teamsFile = config['DEFAULT']['TEAMS']
 	backup = config['DEFAULT']['BACKUP']
-	print(distance, teamsFile, backup)
+	homeNumber = config['HOME']['NUMBER']
+	print(distance, teamsFile, backup, homeNumber)
 
 
 def readTeams():
@@ -78,7 +80,7 @@ def calcRank():
 	return toSort
 
 def main():
-	global teamList, timeList, backup,startTime, distance
+	global teamList, timeList, backup,startTime, distance, homeNumber
 	run = True
 	start = False
 	while run:
@@ -135,6 +137,8 @@ def main():
 				tm = Time.time() - startTime
 				nums = userIn.split(' ')
 				for num in nums:
+					if num in homeNumber:
+						print(prettyTime(tm - timeList[num][-1]))
 					if num in timeList:
 						timeList[num.strip()].append(tm)
 						back.write(num + ' = ' + timeConvert(tm) + '\n')
