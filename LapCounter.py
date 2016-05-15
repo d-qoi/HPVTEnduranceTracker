@@ -138,7 +138,7 @@ def main():
 				nums = userIn.split(' ')
 				for num in nums:
 					if num in homeNumber:
-						print(prettyTime(tm - timeList[num][-1]))
+						print(prettyTime(tm - timeList[num][-1]) + " @lap " + str(len(timeList[num])))
 					if num in timeList:
 						timeList[num.strip()].append(tm)
 						back.write(num + ' = ' + timeConvert(tm) + '\n')
